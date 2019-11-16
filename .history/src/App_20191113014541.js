@@ -3,31 +3,30 @@ import './App.css';
 //import openSocket from 'socket.io-client';
 import socketIOClient from "socket.io-client";
 //const  socket = openSocket('https://qrinfot.herokuapp.com/');
-const socket = socketIOClient('https://qrinfot.herokuapp.com/', {transports: ['websocket']});
+const socket = socketIOClient('https://qrinfot.herokuapp.com/https://joke-api-strict-cors.appspot.com/jokes/random');
 class App extends Component {
     subscribeToTimer(cb) {
 
         console.log('check 1', socket.connected);
         socket.on('message', function(message) {
-          console.log('Le serveur a un message pour vous : ' + message);
+          alert('Le serveur a un message pour vous : ' + message);
         });
   
 
         socket.on('connect', function() {
             console.log('check 2', socket.connected);
-            
+            socket.emit('messaged', 'Salut serveur, ça va ?');
            // socket.emit('message', 'Salut serveur, ça va ?');
            // socket.on('timer', timestamp => cb(null, timestamp));
            // socket.emit('date', 1000);
         });
-        
 
  
 }
 
 clickEmit() {
-  //const socket = socketIOClient('https://qrinfot.herokuapp.com/https://joke-api-strict-cors.appspot.com/jokes/random');
-  socket.emit('messaged', 'Salut serveur, ça va ?');
+  const socket = socketIOClient('https://qrinfot.herokuapp.com/https://joke-api-strict-cors.appspot.com/jokes/random');
+  
  /* socket.on('connect', function() {
     console.log('check 2', socket.connected);
    // socket.emit('message', 'Salut serveur, ça va ?');
@@ -40,7 +39,6 @@ clickEmit() {
         this.subscribeToTimer((err, timestamp) => this.setState({
             timestamp
         }));
-        this.clickEmit = this.clickEmit.bind(this);
     }
 
     state = {
@@ -52,10 +50,8 @@ clickEmit() {
           <p className="App-intro">
               This is the timer value: {this.state.timestamp}
            </p>
-
-           <button onClick={this.clickEmit}>
-        {'dddd'}
-      </button>
+           <p><input type="button" onClick = {this.clickEmit()} value="Embêter le serveur" id="poke" /></p>
+          
       </div>
     );
   }

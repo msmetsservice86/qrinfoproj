@@ -3,7 +3,7 @@ import './App.css';
 //import openSocket from 'socket.io-client';
 import socketIOClient from "socket.io-client";
 //const  socket = openSocket('https://qrinfot.herokuapp.com/');
-const socket = socketIOClient('https://qrinfot.herokuapp.com/', {transports: ['websocket']});
+const socket = socketIOClient('https://qrinfot.herokuapp.com/');
 class App extends Component {
     subscribeToTimer(cb) {
 
@@ -40,7 +40,6 @@ clickEmit() {
         this.subscribeToTimer((err, timestamp) => this.setState({
             timestamp
         }));
-        this.clickEmit = this.clickEmit.bind(this);
     }
 
     state = {
@@ -52,10 +51,8 @@ clickEmit() {
           <p className="App-intro">
               This is the timer value: {this.state.timestamp}
            </p>
-
-           <button onClick={this.clickEmit}>
-        {'dddd'}
-      </button>
+           <p><input type="button" onClick = {this.clickEmit()} value="Embêter le serveur" id="poke" /></p>
+          
       </div>
     );
   }

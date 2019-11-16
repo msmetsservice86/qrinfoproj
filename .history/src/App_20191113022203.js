@@ -40,7 +40,6 @@ clickEmit() {
         this.subscribeToTimer((err, timestamp) => this.setState({
             timestamp
         }));
-        this.clickEmit = this.clickEmit.bind(this);
     }
 
     state = {
@@ -52,10 +51,8 @@ clickEmit() {
           <p className="App-intro">
               This is the timer value: {this.state.timestamp}
            </p>
-
-           <button onClick={this.clickEmit}>
-        {'dddd'}
-      </button>
+           <p><button onClick = {this.clickEmit()} value="Embêter le serveur" id="poke" >ffffff</button></p>
+          
       </div>
     );
   }
